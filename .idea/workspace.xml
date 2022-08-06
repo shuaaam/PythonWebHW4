@@ -2,67 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa57ffe3-41b4-471a-b6eb-288b1273bd00" name="Changes" comment="init commit">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/file_parser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/142--15-09-20--14-24-00.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/46908445_946722405519654_5833870154219388928_n.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Logo/580b57fcd9996e24bc43c530.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Logo/IBM+Logo+for+Acclaim+Profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Logo/Netflix_Logo_DigitalVideo_0701.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Logo/Test/test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Logo/ibm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Logo/logo-tm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Logo/uber-logo-decal-sticker-uber-logo-500x500.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/0da49d3ef8c750c480313b7cc2ea1123.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/1-UTGVejeSej9w7x_aRuZ1IA.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/15-Websites-built-with-Express_785.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/1600 (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/1600 (2).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/1600.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/2017-07-12_135143.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/3-tuberculosis.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/612195-636458390742664213-16x9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/DPlMaBtW4AA-Yfs.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/Dc-cIXeVAAU5z0y.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/Install-Node.js-for-Windows.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/Logo_nodeuainfo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/Meduza feat. Hozier - Tell It To My Heart (Amice Remix).mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/NodeJS (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/SQL-MongoDB Correspondence.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/golang.sh-600x600.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/hqdefault.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/icon-nodejs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/mongodb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/nodeJS.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/node_turtle.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/nodejs-todo-app-begin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/nodejs.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/nodejs_dark_by_wfuller-db4e1ip.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/nodejslogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/risovach.ru.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/schedule.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/temp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/Зачем-нужен-Node.js-.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/Рисунок1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/Other/Рисунок2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/bot-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/flask-compose.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/icons/Dev-Icon-Green-192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/icons/e-learning_icon.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/icons/lzBkVoR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/icons/mongodb.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/icons/utilities-terminal-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/javascript_encapsulation.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/photo_2018-06-03_11-49-55.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/wallpaper/3760d167-7870-48f3-a50f-56df139274b2.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/wallpaper/8039ebad-c20f-4cf1-b42f-b6a226dbce76.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/wallpaper/Node-JS-wallpaper-1920-1200.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/wallpaper/js.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/wallpaper/node-wallpaper.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/wallpaper/node_js_by_myvushka-d8yrtqh.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/wallpaper/nodejs-2560x1440.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/garbage/wallpaper/nodejs-wallpaper-nsfw.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/normalize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,8 +27,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/Users/oleksandramelnyk/prog/hw-web/PythonWebHW4",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
@@ -134,7 +76,7 @@
       <workItem from="1659375955068" duration="1765000" />
       <workItem from="1659421101064" duration="3326000" />
       <workItem from="1659770619836" duration="2110000" />
-      <workItem from="1659772750629" duration="129000" />
+      <workItem from="1659772750629" duration="843000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1659376505280</created>
@@ -150,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659772582389</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="init commit">
+      <created>1659773048253</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1659773048253</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
