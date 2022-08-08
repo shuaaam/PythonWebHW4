@@ -8,6 +8,7 @@ import sys
 import file_parser as parser
 from normalize import normalize
 
+
 class Concat:
     def __init__(self, folder_for_scan, event):
         self.work_order = queue.Queue()
@@ -29,14 +30,14 @@ class Concat:
                     main(folder_for_scan.resolve())
 
 
-
 def reader(work_queue):
     while True:
         if files_queue.empty():
             break
         reader_file = files_queue.get()
         logging.info(f'read file {reader_file.name}')
-        work_queue.put((reader_file)
+        work_queue.put(reader_file)
+
 
 def handle_media(filename: Path, target_folder: Path):
     target_folder.mkdir(exist_ok=True, parents=True)
@@ -124,7 +125,7 @@ if __name__ == '__main__':
     event_reader = threading.Event()
     files_queue = queue.Queue()
 
-    list_files = Path('.').joinpath('garbage')
+    list_files = Path('.').joinpath('garbage').glob('**/*')
 
     for file in list_files:
         files_queue.put(file)
@@ -134,7 +135,7 @@ if __name__ == '__main__':
     else:
         if sys.argv[1]:
             folder_for_scan = Path(sys.argv[1])
-        concat = Concat(source_file, event_reader)
+        concat = Concat(folder_for_scan, event_reader)
         thread_concat = threading.Thread(target=concat, name='Concat')
         thread_concat.start()
 
