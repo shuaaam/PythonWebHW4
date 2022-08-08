@@ -2,11 +2,12 @@ import requests
 import threading
 import queue
 import logging
-from pathlib import Path
+from pathlib import Path, PurePath
 import shutil
 import sys
 import file_parser as parser
 from normalize import normalize
+
 
 class Concat:
     def __init__(self, folder_for_scan, event):
@@ -23,11 +24,10 @@ class Concat:
             else:
                 reader_file, data = self.work_order.get()
                 logging.info(f'operation with file {reader_file.name}')
-                if sys.argv[1]:
-                    folder_for_scan = Path(sys.argv[1])
-                    print(f'Start in folder {folder_for_scan.resolve()}')
-                    main(folder_for_scan.resolve())
 
+                folder_for_scan = Path('.').joinpath('garbage')
+                print(f'Start in folder {folder_for_scan.resolve()}')
+                main(folder_for_scan.resolve())
 
 
 def reader(work_queue):
@@ -36,7 +36,8 @@ def reader(work_queue):
             break
         reader_file = files_queue.get()
         logging.info(f'read file {reader_file.name}')
-        work_queue.put((reader_file)
+        work_queue.put(reader_file)
+
 
 def handle_media(filename: Path, target_folder: Path):
     target_folder.mkdir(exist_ok=True, parents=True)
@@ -124,7 +125,8 @@ if __name__ == '__main__':
     event_reader = threading.Event()
     files_queue = queue.Queue()
 
-    list_files = Path('.').joinpath('garbage')
+    list_files = Path('.').joinpath('garbage').glob('**/*')
+
 
     for file in list_files:
         files_queue.put(file)
@@ -132,9 +134,10 @@ if __name__ == '__main__':
     if files_queue.empty():
         logging.info('Folder is empty')
     else:
-        if sys.argv[1]:
-            folder_for_scan = Path(sys.argv[1])
-        concat = Concat(source_file, event_reader)
+        folder_for_scan = Path('.').joinpath('garbage')
+        print(f'Start in folder {folder_for_scan.resolve()}')
+        main(folder_for_scan.resolve())
+        concat = Concat(folder_for_scan, event_reader)
         thread_concat = threading.Thread(target=concat, name='Concat')
         thread_concat.start()
 
