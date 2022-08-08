@@ -116,3 +116,7 @@ if __name__ == '__main__':
     print(f'Unknown types of files: {UNKNOWN}')
 
     print(FOLDERS[::-1])
+
+
+def parse(file):
+    pass

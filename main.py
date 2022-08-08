@@ -8,11 +8,13 @@ import sys
 import file_parser as parser
 from normalize import normalize
 
-class Concat:
+
+class Scanner(threading.Thread):
     def __init__(self, folder_for_scan, event):
+        super().__init__()
+        self.folder_for_scan = folder_for_scan
         self.work_order = queue.Queue()
         self.event = event
-        self.folder_for_scan = folder_for_scan
 
     def __call__(self, *args, **kwargs):
         while True:
@@ -21,22 +23,17 @@ class Concat:
                     logging.info('Operation completed')
                     break
             else:
-                reader_file, data = self.work_order.get()
+                reader_file = self.work_order.get()
                 logging.info(f'operation with file {reader_file.name}')
-                if sys.argv[1]:
-                    folder_for_scan = Path(sys.argv[1])
-                    print(f'Start in folder {folder_for_scan.resolve()}')
-                    main(folder_for_scan.resolve())
 
 
-
-def reader(work_queue):
+def reader(work_queue, event):
     while True:
         if files_queue.empty():
             break
         reader_file = files_queue.get()
         logging.info(f'read file {reader_file.name}')
-        work_queue.put((reader_file)
+
 
 def handle_media(filename: Path, target_folder: Path):
     target_folder.mkdir(exist_ok=True, parents=True)
@@ -51,7 +48,7 @@ def handle_other(filename: Path, target_folder: Path):
 def handle_archive(filename: Path, target_folder: Path):
     target_folder.mkdir(exist_ok=True, parents=True)
     folder_for_file = target_folder / \
-        normalize(filename.name.replace(filename.suffix, ''))
+                      normalize(filename.name.replace(filename.suffix, ''))
 
     folder_for_file.mkdir(exist_ok=True, parents=True)
     try:
@@ -124,7 +121,7 @@ if __name__ == '__main__':
     event_reader = threading.Event()
     files_queue = queue.Queue()
 
-    list_files = Path('.').joinpath('garbage')
+    list_files = Path('.').joinpath('garbage').glob('*.*')
 
     for file in list_files:
         files_queue.put(file)
@@ -132,17 +129,19 @@ if __name__ == '__main__':
     if files_queue.empty():
         logging.info('Folder is empty')
     else:
-        if sys.argv[1]:
-            folder_for_scan = Path(sys.argv[1])
-        concat = Concat(source_file, event_reader)
-        thread_concat = threading.Thread(target=concat, name='Concat')
-        thread_concat.start()
+        folder_for_scan = Path('garbage')
+        print(f'Start in folder {folder_for_scan.resolve()}')
+        main(folder_for_scan.resolve())
+        logging.info('Start scan')
+        scanner = Scanner(folder_for_scan, event_reader)
+        thread_scanner = threading.Thread(target=scanner, args=(files_queue, event_reader), name='scanner')
+        thread_scanner.start()
 
         threads = []
-        for i in range(2):
-            threads_reader = threading.Thread(target=reader, args=(concat.work_order, ), name=f'reader-{i}')
-            threads.append(threads_reader)
-            threads_reader.start()
+        for i in range(3):
+            thread_reader = threading.Thread(target=reader, args=(files_queue, event_reader), name=f'reader{i}')
+            threads.append(thread_reader)
+            thread_reader.start()
 
         [thread.join() for thread in threads]
         event_reader.set()
