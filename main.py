@@ -25,10 +25,9 @@ class Concat:
                 reader_file, data = self.work_order.get()
                 logging.info(f'operation with file {reader_file.name}')
 
-                if sys.argv[1]:
-                    folder_for_scan = Path(sys.argv[1])
-                    print(f'Start in folder {folder_for_scan.resolve()}')
-                    main(folder_for_scan.resolve())
+                folder_for_scan = Path('.').joinpath('garbage')
+                print(f'Start in folder {folder_for_scan.resolve()}')
+                main(folder_for_scan.resolve())
 
 
 def reader(work_queue):
@@ -135,17 +134,18 @@ if __name__ == '__main__':
     if files_queue.empty():
         logging.info('Folder is empty')
     else:
-        if sys.argv[1]:
-            folder_for_scan = Path(sys.argv[1])
-            concat = Concat(folder_for_scan, event_reader)
-            thread_concat = threading.Thread(target=concat, name='Concat')
-            thread_concat.start()
+        folder_for_scan = Path('.').joinpath('garbage')
+        print(f'Start in folder {folder_for_scan.resolve()}')
+        main(folder_for_scan.resolve())
+        concat = Concat(folder_for_scan, event_reader)
+        thread_concat = threading.Thread(target=concat, name='Concat')
+        thread_concat.start()
 
-            threads = []
-            for i in range(2):
-                threads_reader = threading.Thread(target=reader, args=(concat.work_order, ), name=f'reader-{i}')
-                threads.append(threads_reader)
-                threads_reader.start()
+        threads = []
+        for i in range(2):
+            threads_reader = threading.Thread(target=reader, args=(concat.work_order, ), name=f'reader-{i}')
+            threads.append(threads_reader)
+            threads_reader.start()
 
-            [thread.join() for thread in threads]
-            event_reader.set()
+        [thread.join() for thread in threads]
+        event_reader.set()
