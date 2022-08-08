@@ -2,7 +2,7 @@ import requests
 import threading
 import queue
 import logging
-from pathlib import Path
+from pathlib import Path, PurePath
 import shutil
 import sys
 import file_parser as parser
@@ -24,6 +24,7 @@ class Concat:
             else:
                 reader_file, data = self.work_order.get()
                 logging.info(f'operation with file {reader_file.name}')
+
                 if sys.argv[1]:
                     folder_for_scan = Path(sys.argv[1])
                     print(f'Start in folder {folder_for_scan.resolve()}')
@@ -127,6 +128,7 @@ if __name__ == '__main__':
 
     list_files = Path('.').joinpath('garbage').glob('**/*')
 
+
     for file in list_files:
         files_queue.put(file)
 
@@ -135,15 +137,15 @@ if __name__ == '__main__':
     else:
         if sys.argv[1]:
             folder_for_scan = Path(sys.argv[1])
-        concat = Concat(folder_for_scan, event_reader)
-        thread_concat = threading.Thread(target=concat, name='Concat')
-        thread_concat.start()
+            concat = Concat(folder_for_scan, event_reader)
+            thread_concat = threading.Thread(target=concat, name='Concat')
+            thread_concat.start()
 
-        threads = []
-        for i in range(2):
-            threads_reader = threading.Thread(target=reader, args=(concat.work_order, ), name=f'reader-{i}')
-            threads.append(threads_reader)
-            threads_reader.start()
+            threads = []
+            for i in range(2):
+                threads_reader = threading.Thread(target=reader, args=(concat.work_order, ), name=f'reader-{i}')
+                threads.append(threads_reader)
+                threads_reader.start()
 
-        [thread.join() for thread in threads]
-        event_reader.set()
+            [thread.join() for thread in threads]
+            event_reader.set()
