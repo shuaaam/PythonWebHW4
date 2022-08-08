@@ -1,9 +1,42 @@
+import requests
+import threading
+import queue
+import logging
 from pathlib import Path
 import shutil
 import sys
 import file_parser as parser
 from normalize import normalize
 
+class Concat:
+    def __init__(self, folder_for_scan, event):
+        self.work_order = queue.Queue()
+        self.event = event
+        self.folder_for_scan = folder_for_scan
+
+    def __call__(self, *args, **kwargs):
+        while True:
+            if self.work_order.empty():
+                if self.event.is_set():
+                    logging.info('Operation completed')
+                    break
+            else:
+                reader_file, data = self.work_order.get()
+                logging.info(f'operation with file {reader_file.name}')
+                if sys.argv[1]:
+                    folder_for_scan = Path(sys.argv[1])
+                    print(f'Start in folder {folder_for_scan.resolve()}')
+                    main(folder_for_scan.resolve())
+
+
+
+def reader(work_queue):
+    while True:
+        if files_queue.empty():
+            break
+        reader_file = files_queue.get()
+        logging.info(f'read file {reader_file.name}')
+        work_queue.put((reader_file)
 
 def handle_media(filename: Path, target_folder: Path):
     target_folder.mkdir(exist_ok=True, parents=True)
@@ -16,13 +49,9 @@ def handle_other(filename: Path, target_folder: Path):
 
 
 def handle_archive(filename: Path, target_folder: Path):
-    # Создаем папку для архивов
     target_folder.mkdir(exist_ok=True, parents=True)
-    #  Создаем папку куда распаковываем архив
-    # Берем суффикс у файла и убираем replace(filename.suffix, '')
     folder_for_file = target_folder / \
         normalize(filename.name.replace(filename.suffix, ''))
-    #  создаем папку для архива с именем файла
 
     folder_for_file.mkdir(exist_ok=True, parents=True)
     try:
@@ -86,13 +115,34 @@ def main(folder: Path):
     for file in parser.ARCHIVES:
         handle_archive(file, folder / 'archives')
 
-    # Выполняем реверс списка для того, чтобы все папки удалить.
     for folder in parser.FOLDERS[::-1]:
         handle_folder(folder)
 
 
 if __name__ == '__main__':
-    if sys.argv[1]:
-        folder_for_scan = Path(sys.argv[1])
-        print(f'Start in folder {folder_for_scan.resolve()}')
-        main(folder_for_scan.resolve())
+    logging.basicConfig(level=logging.INFO, format='%(threadName)s %(message)s')
+    event_reader = threading.Event()
+    files_queue = queue.Queue()
+
+    list_files = Path('.').joinpath('garbage')
+
+    for file in list_files:
+        files_queue.put(file)
+
+    if files_queue.empty():
+        logging.info('Folder is empty')
+    else:
+        if sys.argv[1]:
+            folder_for_scan = Path(sys.argv[1])
+        concat = Concat(source_file, event_reader)
+        thread_concat = threading.Thread(target=concat, name='Concat')
+        thread_concat.start()
+
+        threads = []
+        for i in range(2):
+            threads_reader = threading.Thread(target=reader, args=(concat.work_order, ), name=f'reader-{i}')
+            threads.append(threads_reader)
+            threads_reader.start()
+
+        [thread.join() for thread in threads]
+        event_reader.set()
